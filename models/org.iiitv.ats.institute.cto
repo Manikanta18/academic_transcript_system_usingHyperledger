@@ -1,0 +1,117 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Write your model definitions here
+ */
+
+namespace org.iiitv.ats.institute
+
+// institute participant
+participant Institute identified by instituteId {
+  o String instituteId
+  o Contact contact
+}
+
+// student participant
+participant Student identified by studentId {
+  o String studentId
+  o Contact contact
+  o Department departmentType
+  o String batch // example 2015-19
+}
+
+// contact for participant
+concept Contact {
+  o String fName
+  o String lname
+  o String email
+  o String mobile
+}
+
+//batch for studnet
+enum Department {
+  o   IT
+  o   CSE
+}
+
+// transcript
+asset Transcript identified by transcriptId {
+  o String transcriptId
+  --> Student student
+  o SemesterOne semesterOne optional
+  // o SemesterTwo semesterTwo optional
+  // o SemesterThree semesterThree optional
+  // o SemesterFour semesterFour optional
+  // o SemesterFive semesterFive optional
+  // o SemesterSix semesterSix optional
+  // o Semesterseven semesterseven optional
+  // o SemesterEight semesterEight optional
+
+}
+
+concept SemesterOne {
+  o String el101
+  o String ma101
+  o String it101
+  o String it102
+  o String ph101
+  o String hm101
+  o String spi 
+  o String cpi
+}
+
+// concept SemesterTwo {
+//   o String conceptName
+// }
+
+// concept SemesterThree {
+//   o String conceptName
+// }
+
+// concept SemesterFour {
+//   o String conceptName
+// }
+
+// concept SemesterFive {
+//   o String conceptName
+// }
+
+// concept SemesterSix {
+//   o String conceptName
+// }
+
+// concept Semesterseven {
+//   o String conceptName
+// }
+
+// concept SemesterEight {
+//   o String conceptName
+// }
+
+
+
+// transaction
+transaction SubmitTranscript {
+  o String studenId            // receiver
+  o String transcriptId        //asset
+  o String instituteId         //approver
+}
+
+event TranscriptSubmitted {
+  o String transcriptId
+}
+
+
+
