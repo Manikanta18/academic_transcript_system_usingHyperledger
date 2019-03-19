@@ -33,7 +33,8 @@ enum Department {
 asset Transcript identified by transcriptId {
   o String transcriptId
   --> Student student
-  o SemesterOne semesterOne optional
+  --> Institute institute
+  o SemesterOne semesterOne 
   // o SemesterTwo semesterTwo optional
   // o SemesterThree semesterThree optional
   // o SemesterFour semesterFour optional
@@ -88,8 +89,8 @@ concept SemesterOne {
 // transaction
 transaction SubmitTranscript {
   o String studenId            // receiver
-  o String transcriptId        //asset
   o String instituteId         //approver
+  --> Transcript transcript       //asset
 }
 
 event TranscriptSubmitted {
