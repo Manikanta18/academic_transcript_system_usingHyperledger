@@ -1,0 +1,31 @@
+
+// reading resources permission
+rule IIITVNetworkAdminPermissionSystem {
+  description: "can READ the system registries"
+  participant: "ANY"
+  operation: READ
+  resource: "org.hyperledger.composer.system.**"
+  action: ALLOW  
+}
+
+// Allow the 'System Network Admin' to carry out Identities management and Network operations
+rule NetworkControlPermission {
+  description:  "give admin ALL access to system resources"
+  participant: "org.hyperledger.composer.system.NetworkAdmin"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.*"
+  action: ALLOW  
+}
+
+// submit transcript transaction permission
+rule IIITVInstitutePermission {
+  description: "only institute can submit transcript"
+  participant: "org.iiitv.ats.institute.Institute"
+  operation: CREATE
+  resource: "org.iiitv.ats.institute.*"
+  transaction: "org.iiitv.ats.institute.SubmitTranscript"
+  action: ALLOW
+}
+
+
+
