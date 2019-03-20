@@ -17,6 +17,14 @@ rule NetworkControlPermission {
   action: ALLOW  
 }
 
+rule ATSControlPermission {
+  description:  "give admin ALL access to iitv resources"
+  participant: "org.hyperledger.composer.system.NetworkAdmin"
+  operation: ALL
+  resource: "org.iiitv.ats.institute.*"
+  action: ALLOW  
+}
+
 // submit transcript transaction permission
 rule IIITVInstitutePermission {
   description: "only institute can submit transcript"
@@ -26,6 +34,4 @@ rule IIITVInstitutePermission {
   transaction: "org.iiitv.ats.institute.SubmitTranscript"
   action: ALLOW
 }
-
-
 
