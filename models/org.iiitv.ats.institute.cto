@@ -85,7 +85,8 @@ concept SemesterOne {
 // transaction
 transaction SubmitTranscript {
   o String studenId            // receiver
-  --> Transcript transcript       //asset
+  o String transcriptId
+  o SemesterOne semesterOne 
 }
 
 event TranscriptSubmitted {
