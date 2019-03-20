@@ -4,22 +4,16 @@ namespace org.iiitv.ats.institute
 // institute participant
 participant Institute identified by instituteId {
   o String instituteId
-  o Contact contact
+  o String role
 }
 
 // student participant
 participant Student identified by studentId {
   o String studentId
-  o Contact contact
+  o String studentName
+  o String email
   o Department departmentType
   o String batchYear // example 2015-19
-}
-
-// contact for participant
-concept Contact {
-  o String fName
-  o String lname
-  o String email
   o String mobile optional
 }
 
@@ -32,8 +26,10 @@ enum Department {
 // transcript
 asset Transcript identified by transcriptId {
   o String transcriptId
-  --> Student student
-  --> Institute institute
+  o String studenId
+  o String studentName
+  o String departmentType
+  o String batchYear
   o SemesterOne semesterOne 
   // o SemesterTwo semesterTwo optional
   // o SemesterThree semesterThree optional
@@ -89,7 +85,6 @@ concept SemesterOne {
 // transaction
 transaction SubmitTranscript {
   o String studenId            // receiver
-  o String instituteId         //approver
   --> Transcript transcript       //asset
 }
 
