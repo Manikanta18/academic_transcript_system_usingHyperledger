@@ -1,7 +1,7 @@
 
 // reading resources permission
 rule IIITVNetworkAdminPermissionSystem {
-  description: "can READ the system registries"
+  description: "Anyone can READ the system registries"
   participant: "ANY"
   operation: READ
   resource: "org.hyperledger.composer.system.**"
@@ -13,25 +13,37 @@ rule NetworkControlPermission {
   description:  "give admin ALL access to system resources"
   participant: "org.hyperledger.composer.system.NetworkAdmin"
   operation: ALL
-  resource: "org.hyperledger.composer.system.*"
+  resource: "org.hyperledger.composer.system.**"
   action: ALLOW  
 }
 
 rule ATSControlPermission {
-  description:  "give admin ALL access to iitv resources"
+  description:  "give admin ALL access to iiitv resources"
   participant: "org.hyperledger.composer.system.NetworkAdmin"
   operation: ALL
   resource: "org.iiitv.ats.institute.*"
   action: ALLOW  
 }
 
-// submit transcript transaction permission
-rule IIITVInstitutePermission {
-  description: "only institute can submit transcript"
-  participant: "org.iiitv.ats.institute.Institute"
-  operation: CREATE
-  resource: "org.iiitv.ats.institute.*"
-  transaction: "org.iiitv.ats.institute.SubmitTranscript"
+// submit transcript transaction permission and transcript resources
+rule SystemAdminPermissionTranscript {
+  description: "Admin can submit transcript"
+  participant: "org.hyperledger.composer.system.NetworkAdmin"
+  operation: ALL
+  resource: "org.iiitv.ats.transcript.*"
+  transaction: "org.iiitv.ats.transcript.SubmitTranscript"
   action: ALLOW
 }
+
+// submit transcript transaction permission
+rule InstitutePermissionTranscript {
+  description: "only institute can submit transcript"
+  participant: "org.iiitv.ats.institute.Institute"
+  operation: ALL
+  resource: "org.iiitv.ats.transcript.*"
+  transaction: "org.iiitv.ats.transcript.SubmitTranscript"
+  action: ALLOW
+}
+
+
 
